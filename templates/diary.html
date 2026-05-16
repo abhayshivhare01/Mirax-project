@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary View</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#121212;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:30px;
+        }
+
+        .container{
+            width:800px;
+            background:#1e1e1e;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* HEADER */
+
+        .top-bar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:25px;
+            border-bottom:1px solid #333;
+            padding-bottom:15px;
+        }
+
+        .title{
+            font-size:32px;
+            color:#8b5cf6;
+            font-weight:bold;
+        }
+
+        .actions{
+            display:flex;
+            gap:15px;
+        }
+
+        .btn{
+            padding:10px 18px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        .edit-btn{
+            background:#8b5cf6;
+            color:white;
+        }
+
+        .edit-btn:hover{
+            background:#7c3aed;
+        }
+
+        .delete-btn{
+            background:#ff4d4d;
+            color:white;
+        }
+
+        .delete-btn:hover{
+            background:#e63939;
+        }
+
+        /* DETAILS */
+
+        .details{
+            margin-bottom:25px;
+        }
+
+        .details p{
+            margin-bottom:12px;
+            font-size:17px;
+            color:#dddddd;
+        }
+
+        .tag{
+            display:inline-block;
+            background:#2c2c2c;
+            padding:8px 14px;
+            border-radius:20px;
+            margin-right:10px;
+            margin-top:10px;
+            color:#8b5cf6;
+        }
+
+        /* DIARY CONTENT */
+
+        .diary-box{
+            background:#2a2a2a;
+            padding:25px;
+            border-radius:15px;
+            line-height:1.8;
+            font-size:17px;
+            color:#eeeeee;
+            margin-bottom:30px;
+        }
+
+        /* PHOTO GALLERY */
+
+        .gallery-title{
+            font-size:22px;
+            margin-bottom:20px;
+            color:#8b5cf6;
+        }
+
+        .gallery{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .gallery img{
+            width:220px;
+            height:150px;
+            object-fit:cover;
+            border-radius:15px;
+            border:2px solid #333;
+            transition:0.3s;
+        }
+
+        .gallery img:hover{
+            transform:scale(1.05);
+        }
+
+        .popup{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.9);
+            justify-content:center;
+            align-items:center;
+            z-index:999;
+        }
+
+        .popup img{
+            max-width:90%;
+            max-height:90%;
+            border-radius:20px;
+        }
+
+        .gallery img{
+            cursor:pointer;
+        }
+        
+    </style>
+</head>
+
+<script>
+
+function openImage(){
+    let img = document.getElementById("diaryImage").src;
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup-img").src = img;
+}
+function closeImage(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+<body>
+    <div class="container">
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div class="title">
+            {{ diary[2] }}
+            </div>
+            <div class="actions">
+                <a href="/edit_diary/{{ diary[0] }}">
+                    <button class="btn edit-btn"> Edit </button>
+                </a>
+                <a href="/delete_diary/{{ diary[0] }}">
+                    <button class="btn delete-btn"> Delete </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- DETAILS -->
+        <div class="details">
+            <p> 📅 {{ diary[5] }} → {{ diary[6] }} </p>
+            <p> Mood: {{ diary[4] }}</p>
+            <p>👥 Tagged Friends:</p>
+            {% for person in diary[7].split(',') %}
+                    <span class="tag">
+                    @{{ person.strip() }}
+                    </span>
+            {% endfor %}
+        </div>
+
+        <!-- DIARY CONTENT -->
+        <div class="diary-box"> {{ diary[3] }} </div>
+
+        <!-- PHOTO GALLERY -->
+        {% if diary[8] %}
+        <div class="gallery-title">
+            📸 Photo Gallery
+        </div>
+        <div class="gallery">
+            <img
+                id="diaryImage"
+                src="{{ url_for('static', filename='uploads/' + diary[8]) }}"
+                onclick="openImage()"
+            >
+        </div>
+        {% endif %}
+
+<!-- POPUP IMAGE -->
+        <div id="popup" class="popup" onclick="closeImage()">
+            <img id="popup-img">
+        </div>
+    </div>
+
+</body>
+</html>

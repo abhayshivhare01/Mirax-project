@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Page</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#121212;
+            color:white;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:40px;
+            color:#8b5cf6;
+            font-size:38px;
+        }
+
+        .mood-section{
+            background:#1e1e1e;
+            padding:25px;
+            border-radius:20px;
+            margin-bottom:30px;
+            box-shadow:0 0 15px rgba(0,0,0,0.4);
+        }
+
+        .mood-title{
+            font-size:28px;
+            margin-bottom:20px;
+            color:#8b5cf6;
+            border-bottom:1px solid #333;
+            padding-bottom:10px;
+        }
+
+        .diary-list{
+            list-style:none;
+        }
+
+        .diary-list li{
+            background:#2a2a2a;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:15px;
+            transition:0.3s;
+            cursor:pointer;
+            font-size:17px;
+        }
+
+        .diary-list li:hover{
+            background:#8b5cf6;
+            transform:translateX(5px);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>My Mood Diaries</h1>
+
+    <!-- HAPPY -->
+
+    <div class="mood-section">
+
+        <div class="mood-title">
+            😊 Happy
+        </div>
+
+        <ul class="diary-list">
+
+            {% for diary in diaries %}
+
+                {% if "Happy" in diary[4] %}
+
+                    <li>
+                        {{ diary[2] }}
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- SAD -->
+
+    <div class="mood-section">
+
+        <div class="mood-title">
+            😔 Sad
+        </div>
+
+        <ul class="diary-list">
+
+            {% for diary in diaries %}
+
+                {% if "Sad" in diary[4] %}
+
+                    <li>
+                        {{ diary[2] }}
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- EXCITED -->
+
+    <div class="mood-section">
+
+        <div class="mood-title">
+            🚀 Excited
+        </div>
+
+        <ul class="diary-list">
+
+            {% for diary in diaries %}
+
+                {% if "Excited" in diary[4] %}
+
+                    <li>
+                        {{ diary[2] }}
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Calm -->
+
+    <div class="mood-section">
+
+        <div class="mood-title">
+            😌 Calm
+        </div>
+
+        <ul class="diary-list">
+
+            {% for diary in diaries %}
+
+                {% if "Calm" in diary[4] %}
+
+                    <li>
+                        {{ diary[2] }}
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Angry -->
+
+    <div class="mood-section">
+
+        <div class="mood-title">
+            😡 Angry
+        </div>
+
+        <ul class="diary-list">
+
+            {% for diary in diaries %}
+
+                {% if "Angry" in diary[4] %}
+
+                    <li>
+                        {{ diary[2] }}
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+</body>
+</html>

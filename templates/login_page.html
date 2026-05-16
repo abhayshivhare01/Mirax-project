@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulSpace Login</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#121212;
+        }
+
+        .login-container{
+            width:350px;
+            background:#1e1e1e;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 0 20px rgba(0,0,0,0.5);
+            text-align:center;
+        }
+
+        .login-container h1{
+            color:white;
+            margin-bottom:30px;
+            font-size:32px;
+        }
+
+        .input-box{
+            width:100%;
+            margin-bottom:20px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            background:#2c2c2c;
+            color:white;
+            font-size:16px;
+        }
+
+        .input-box input::placeholder{
+            color:#bbbbbb;
+        }
+
+        .login-btn{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:#8b5cf6;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .login-btn:hover{
+            background:#7c3aed;
+        }
+
+        .register-text{
+            margin-top:20px;
+            color:#cccccc;
+            font-size:14px;
+        }
+
+        .register-text a{
+            color:#8b5cf6;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .register-text a:hover{
+            text-decoration:underline;
+        }
+
+        .error-message{
+            color:#ff4d4d;
+            text-align:center;
+            margin-top:15px;
+            margin-bottom:10px;
+            font-size:15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1>SoulSpace</h1>
+
+        <form method="post">
+
+            <div class="input-box">
+                <input type="text" name='username' placeholder="Username" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name='password' placeholder="Password" required>
+            </div>
+
+            <input type="submit" class="login-btn" value="Login">
+
+
+
+        </form>
+
+
+
+        <div class="register-text">
+            Don't have an account?
+            <a href="/register">Register</a>
+        </div>
+
+        {% if error %}
+        <p class="error-message">
+        {{ error }}
+        </p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

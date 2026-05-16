@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Diary</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#121212;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:30px;
+            color:white;
+        }
+
+        .container{
+            width:700px;
+            background:#1e1e1e;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .container h1{
+            text-align:center;
+            margin-bottom:30px;
+            color:#8b5cf6;
+        }
+
+        .form-group{
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-size:16px;
+            color:#dddddd;
+        }
+
+        input,
+        select,
+        textarea{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:#2c2c2c;
+            color:white;
+            font-size:15px;
+            outline:none;
+        }
+
+        textarea{
+            height:180px;
+            resize:none;
+        }
+
+        .date-container{
+            display:flex;
+            gap:20px;
+        }
+
+        .date-box{
+            flex:1;
+        }
+
+        input[type="file"]{
+            background:#2c2c2c;
+            padding:10px;
+            cursor:pointer;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:space-between;
+            margin-top:30px;
+        }
+
+        .save-btn,
+        .delete-btn{
+            width:48%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .save-btn{
+            background:#8b5cf6;
+            color:white;
+        }
+
+        .save-btn:hover{
+            background:#7c3aed;
+        }
+
+        .delete-btn{
+            background:#ff4d4d;
+            color:white;
+        }
+
+        .delete-btn:hover{
+            background:#e63939;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Add Diary</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- TITLE -->
+
+            <div class="form-group">
+
+                <label>Title</label>
+
+                <input type="text" name="title" placeholder="Enter diary title">
+
+            </div>
+
+            <!-- DATES -->
+
+            <div class="date-container">
+
+                <div class="date-box">
+
+                    <label>From</label>
+
+                    <input type="date" name="start_date">
+
+                </div>
+
+                <div class="date-box">
+
+                    <label>To</label>
+
+                    <input type="date" name="end_date">
+
+                </div>
+
+            </div>
+
+            <!-- MOOD -->
+
+            <div class="form-group">
+
+                <label>Mood</label>
+
+                <select name="mood">
+
+                    <option>😊 Happy</option>
+                    <option>😔 Sad</option>
+                    <option>😌 Calm</option>
+                    <option>🚀 Excited</option>
+                    <option>😡 Angry</option>
+
+                </select>
+
+            </div>
+
+            <!-- MENTION FRIENDS -->
+
+            <div class="form-group">
+
+                <label>Mention Friends</label>
+
+                <input type="text" name="tagged_people" placeholder="Type usernames separated by commas">
+
+
+            </div>
+
+            <div class="form-group">
+
+            <label>Folder Name</label>
+
+                <input type="text"
+                    name="folder_name"
+                    placeholder="Trips, Friends, Cricket, Family">
+
+            </div>
+
+            <!-- PHOTO -->
+
+            <div class="form-group">
+
+                <label>Upload Photo</label>
+
+                <input type="file" name="image">
+
+            </div>
+
+            <!-- DIARY CONTENT -->
+
+            <div class="form-group">
+
+                <label>Diary Content</label>
+
+                <textarea name="content" placeholder="Write your memories here..."></textarea>
+
+            </div>
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <input type="submit" class="save-btn" value="Save">
+
+
+                <input type="reset" class="delete-btn" value="Delete">
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

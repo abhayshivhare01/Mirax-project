@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#121212;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            color:white;
+        }
+
+        .profile-container{
+            width:450px;
+            background:#1e1e1e;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .profile-title{
+            text-align:center;
+            font-size:34px;
+            margin-bottom:30px;
+            color:#8b5cf6;
+        }
+
+        .profile-info{
+            margin-bottom:25px;
+        }
+
+        .profile-info p{
+            margin-bottom:18px;
+            font-size:18px;
+            background:#2a2a2a;
+            padding:14px;
+            border-radius:12px;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:space-between;
+            margin-top:30px;
+        }
+
+        .btn{
+            width:48%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn-link{
+            width:90%;
+            display:block;
+        }
+
+        .password-btn{
+            background:#8b5cf6;
+            color:white;
+        }
+
+        .password-btn:hover{
+            background:#7c3aed;
+        }
+
+        .logout-btn{
+            background:#ff4d4d;
+            color:white;
+        }
+
+        .logout-btn:hover{
+            background:#e63939;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="profile-container">
+
+        <div class="profile-title">
+            👤 Profile
+        </div>
+
+        <div class="profile-info">
+            <p><strong>Username:</strong> {{ user[0] }}</p>
+            <p><strong>Email:</strong> {{ user[1] }}</p>
+            <p><strong>Total Diaries:</strong> {{ total_diaries }}</p>
+            <p><strong>Happy Days:</strong> {{ happy_days }}</p>
+        </div>
+<center>
+        <div class="buttons">
+            <a href="/change_password" class="btn-link">
+            <button class="btn password-btn">
+                Change Password
+            </button>
+                </a>
+        </div>
+    </center>
+    </div>
+
+</body>
+</html>
