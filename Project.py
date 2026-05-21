@@ -28,11 +28,13 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 jwt = JWTManager(app)
 
-app.secret_key = 'India'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'soulspace'
+app.secret_key = os.environ.get("SECRET_KEY")
+
+app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
+app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
+app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
+app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
+app.config['MYSQL_PORT'] = int(os.environ.get("MYSQL_PORT", 3306))
 
 mysql=MySQL()
 mysql.init_app(app)
@@ -153,7 +155,9 @@ def add_diary():
 
         cur = mysql.connection.cursor()
 
-        cur.execute("""INSERT INTO diaries (user_id, title, content, mood, start_date, end_date, tagged_people, folder_name, image)
+        cur.execute("""
+                    INSERT INTO diaries 
+                    (user_id, title, content, mood, start_date, end_date, tagged_people, folder_name, image)
                         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
                         (  user_id,title,content,mood,start_date,end_date,tagged_people,folder_name,filename))
 
@@ -177,7 +181,10 @@ def add_diary():
             if tagged_user:
                 shared_user_id = tagged_user[0]
 
-                cur.execute("""INSERT INTO shared_diaries(diary_id, shared_with_user_id) VALUES (%s, %s)""",
+                cur.execute("""
+                            INSERT INTO shared_diaries
+                                (diary_id, shared_with_user_id)
+                            VALUES (%s, %s)""",
                             (diary_id, shared_user_id))
 
         mysql.connection.commit()
@@ -384,7 +391,14 @@ def edit_diary(id):
         content = request.form["content"]
         mood = request.form["mood"]
 
-        cur.execute("UPDATE diaries SET title=%s, content=%s, mood=%s WHERE id=%s", (title, content, mood, id))
+        cur.execute("""
+                    UPDATE diaries 
+                    SET title=%s,
+                        content=%s, 
+                        mood=%s
+                    WHERE id=%s
+                    """,
+                    (title, content, mood, id))
 
         mysql.connection.commit()
 
