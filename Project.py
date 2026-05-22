@@ -76,22 +76,22 @@ def login_page():
 
         if user:
 
-            stored_password = user[3]
+            stored_password = user['password']
 
             if check_password_hash(stored_password, password):
 
-                session["user_id"] = user[0]
-                session["username"] = user[1]
+                session["user_id"] = user['id']
+                session["username"] = user['username']
                 access_token = create_access_token(
-                    identity=str(user[0]),
-                    additional_claims={"username": user[1]}
+                    identity=str(user['id']),
+                    additional_claims={"username": user['username']}
                 )
 
                 if request.is_json:
                     return jsonify({
                         "access_token": access_token,
-                        "user_id": user[0],
-                        "username": user[1]
+                        "user_id": user['id'],
+                        "username": user['username']
                     })
 
                 response = make_response(redirect("/home"))
