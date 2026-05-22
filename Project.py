@@ -154,7 +154,7 @@ def add_diary():
             filename = secure_filename(image.filename)
             upload_path = os.path.join(app.root_path, "static", "uploads")
             os.makedirs(upload_path, exist_ok=True)
-            image.save(os.path.join("static", "uploads", filename))
+            image.save(os.path.join(upload_path, filename))
 
         cur = mysql.connection.cursor()
 
