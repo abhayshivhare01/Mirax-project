@@ -73,10 +73,10 @@
 
             {% for diary in diaries %}
 
-            <a href="/diary/{{ diary[0] }}"
+            <a href="/diary/{{ diary['id'] }}"
             style="text-decoration:none; color:white;">
 
-                <div class="diary-item"> {{ diary[2] }} </div>
+                <div class="diary-item"> {{ diary['title'] }} </div>
             </a>
             {% endfor %}
         </div>

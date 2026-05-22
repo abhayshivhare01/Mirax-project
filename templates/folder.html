@@ -80,9 +80,9 @@
 
             {% for folder in folders %}
 
-            <a href="/folder_inside_diaries/{{ folder[0] }}" class="diary-link">
+            <a href="/folder_inside_diaries/{{ folder['folder_name'] }}" class="diary-link">
                 <div class="folder">
-                📂 {{ folder[0] }}
+                📂 {{ folder['folder_name'] }}
                  </div>
             </a>
             {% endfor %}

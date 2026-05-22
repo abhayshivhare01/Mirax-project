@@ -153,7 +153,9 @@ def add_diary():
 
         if image and image.filename:
             filename = secure_filename(image.filename)
-            image.save(os.path.join(app.root_path, "static", "uploads", filename))
+            upload_path = os.path.join(app.root_path, "static", "uploads")
+            os.makedirs(upload_path, exist_ok=True)
+            image.save(os.path.join("static", "uploads", filename))
 
         cur = mysql.connection.cursor()
 
@@ -300,7 +302,7 @@ def folder_page():
 
     cur = mysql.connection.cursor()
 
-    cur.execute("SELECT DISTINCT folder_name FROM diaries WHERE user_id=%s", [user_id])
+    cur.execute("SELECT DISTINCT folder_name FROM diaries WHERE user_id=%s AND folder_name IS NOT NULL AND folder_name != ''", [user_id])
 
     folders = cur.fetchall()
 
@@ -328,15 +330,21 @@ def profile_page():
 
     # TOTAL DIARIES
     cur.execute(
-        "SELECT COUNT(*) FROM diaries WHERE user_id=%s",
+        "SELECT COUNT(*) AS total FROM diaries WHERE user_id=%s",
         [user_id]
     )
 
-    total_diaries = cur.fetchone()[0]
+    total_diaries = cur.fetchone()['total']
 
     # HAPPY DIARIES
-    cur.execute("""SELECT COUNT(*) FROM diaries WHERE user_id=%s AND mood LIKE '%%Happy%%'""", [user_id])
-    happy_days = cur.fetchone()[0]
+    cur.execute("""
+        SELECT COUNT(*) AS happy
+        FROM diaries
+        WHERE user_id=%s
+        AND mood LIKE '%%Happy%%'
+    """, [user_id])
+
+    happy_days = cur.fetchone()['happy']
 
     cur.close()
 

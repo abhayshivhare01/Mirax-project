@@ -15,16 +15,16 @@
 
             <input type="text"
                    name="title"
-                   value="{{ diary[2] }}"
+                   value="{{ diary['title'] }}"
                    style="width:100%; padding:10px; margin-bottom:20px;">
 
             <textarea name="content"
-                      style="width:100%; height:200px; padding:10px; margin-bottom:20px;">{{ diary[3] }}</textarea>
+                      style="width:100%; height:200px; padding:10px; margin-bottom:20px;">{{ diary['content'] }}</textarea>
 
             <select name="mood"
                     style="width:100%; padding:10px; margin-bottom:20px;">
 
-                <option>{{ diary[4] }}</option>
+                <option>{{ diary['mood'] }}</option>
 
                 <option>😊 Happy</option>
                 <option>😔 Sad</option>
