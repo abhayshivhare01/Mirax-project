@@ -22,14 +22,13 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-app.config["JWT_SECRET_KEY"] = "soulspace_secret_key"
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
 app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 jwt = JWTManager(app)
 
 app.secret_key = os.environ.get("SECRET_KEY")
-
 app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
 app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
 app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
@@ -442,7 +441,7 @@ def change_password():
 
         user = cur.fetchone()
 
-        stored_password = user[0]
+        stored_password = user['password']
 
         if check_password_hash(stored_password, old_password):
 
