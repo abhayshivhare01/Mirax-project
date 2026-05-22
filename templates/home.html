@@ -250,22 +250,22 @@
 
     {% for diary in diaries %}
 
-    <a href="/diary/{{ diary[0] }}" class="diary-link">
+    <a href="/diary/{{ diary['id'] }}" class="diary-link">
 
         <div class="diary-card">
 
-            <h3>{{ diary[2] }}</h3>
+            <h3>{{ diary['content'] }}</h3>
 
             <p>
-                📅 {{ diary[5] }} → {{ diary[6] }}
+                📅 {{ diary['start_date'] }} → {{ diary['end_date'] }}
             </p>
 
             <p>
-                {{ diary[3][:80] }}...
+                {{ diary['content'][:80] }}...
             </p>
 
             <div class="mood">
-                {{ diary[4] }}
+                {{ diary['mood'] }}
             </div>
 
         </div>
