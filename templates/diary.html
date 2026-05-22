@@ -185,13 +185,13 @@ function closeImage(){
         <!-- TOP BAR -->
         <div class="top-bar">
             <div class="title">
-            {{ diary[2] }}
+            {{ diary['title'] }}
             </div>
             <div class="actions">
-                <a href="/edit_diary/{{ diary[0] }}">
+                <a href="/edit_diary/{{ diary['id'] }}">
                     <button class="btn edit-btn"> Edit </button>
                 </a>
-                <a href="/delete_diary/{{ diary[0] }}">
+                <a href="/delete_diary/{{ diary['id'] }}">
                     <button class="btn delete-btn"> Delete </button>
                 </a>
             </div>
@@ -199,10 +199,10 @@ function closeImage(){
 
         <!-- DETAILS -->
         <div class="details">
-            <p> 📅 {{ diary[5] }} → {{ diary[6] }} </p>
-            <p> Mood: {{ diary[4] }}</p>
+            <p> 📅 {{ diary['start_date'] }} → {{ diary['end_date'] }} </p>
+            <p> Mood: {{ diary['mood'] }}</p>
             <p>👥 Tagged Friends:</p>
-            {% for person in diary[7].split(',') %}
+            {% for person in diary['tagged_people'].split(',') %}
                     <span class="tag">
                     @{{ person.strip() }}
                     </span>
@@ -210,17 +210,17 @@ function closeImage(){
         </div>
 
         <!-- DIARY CONTENT -->
-        <div class="diary-box"> {{ diary[3] }} </div>
+        <div class="diary-box"> {{ diary['content'] }} </div>
 
         <!-- PHOTO GALLERY -->
-        {% if diary[8] %}
+        {% if diary['image'] %}
         <div class="gallery-title">
             📸 Photo Gallery
         </div>
         <div class="gallery">
             <img
                 id="diaryImage"
-                src="{{ url_for('static', filename='uploads/' + diary[8]) }}"
+                src="{{ url_for('static', filename='uploads/' + diary['image']) }}"
                 onclick="openImage()"
             >
         </div>

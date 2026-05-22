@@ -181,7 +181,7 @@ def add_diary():
             tagged_user = cur.fetchone()
 
             if tagged_user:
-                shared_user_id = tagged_user[0]
+                shared_user_id = tagged_user['id']
 
                 cur.execute("""
                             INSERT INTO shared_diaries
